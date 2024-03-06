@@ -22,8 +22,8 @@
 - возвращаем отсортированные данные (помним про табуляцию)
 
 ## Файлы
-- `solution.ipynb` - имплементация удобная для глаз
-- `solution.py` - тоже самое только удобнее для тестов
+- `solution.ipynb` - наглядно, удобно смотреть
+- `solution.py` - тоже самое, удобнее для тестов
 - `testing.py` - тесты
 - `test_input_one.txt`, `test_input_two.txt`, `test_input_three.txt` - входные данные
 - `test_output_one.txt`, `test_output_two.txt`, `test_output_three.txt` - выходные данные
