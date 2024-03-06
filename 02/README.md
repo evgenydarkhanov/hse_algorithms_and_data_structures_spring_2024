@@ -1,9 +1,10 @@
 # Homework 2
 [Описание](https://github.com/mailcourses/hse_algorithms_and_data_structures_spring_2024/blob/main/lesson-04/homework.md)
 ## Логика
-- приходят строки "ключ-значение" с табуляцией между ними
+Несложная, но работает
+- приходят строки "ключ-значение"
 
-- сохраняем их в контейнер в том порядке, в котором они поступают
+- сохраняем их в контейнер в том порядке поступления
 
 - какой контейнер использовать?
 	- можно словарь, но в общем случае в нём не гарантируется порядок элементов
@@ -21,8 +22,8 @@
 - возвращаем отсортированные данные (помним про табуляцию)
 
 ## Файлы
-- `solution.ipynb` - удобная для глаз иллюстрация
-- `solution.py` - внутри тоже самое
+- `solution.ipynb` - имплементация удобная для глаз
+- `solution.py` - тоже самое только удобнее для тестов
 - `testing.py` - тесты
-- `data_input_one.txt`, `data_input_two.txt`, `data_input_three.txt` - входные данные для тестов
-- `data_output_one.txt`, `data_output_two.txt`, `data_output_three.txt` - выходные данные для тестов
+- `test_input_one.txt`, `test_input_two.txt`, `test_input_three.txt` - входные данные
+- `test_output_one.txt`, `test_output_two.txt`, `test_output_three.txt` - выходные данные
