@@ -38,12 +38,11 @@ data_reading(test_original_data, './data/original_data.txt')
 
 print('original data')
 for elem in test_original_data:
-	print(elem)
+	print(*elem)
 print()
 
 quick_sort_and_partition(test_original_data, key=lambda x: x[0])
 print('sorted data')
 for elem in test_original_data:
-	print(elem)
+	print(*elem)
 print()
-
