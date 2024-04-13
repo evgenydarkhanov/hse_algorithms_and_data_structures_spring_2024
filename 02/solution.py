@@ -1,81 +1,70 @@
 import re
 
+# препроцессинг номеров
+def number_to_int(phone_number):
+    result = int(re.sub(r'\D', '', phone_number))
+    return result
 
+# превращает в кортеж (телефон, str, int(телефон))
+def convert_to_tuple(line):
+    tmp = line.split()
+    return (tmp[0], tmp[1], number_to_int(tmp[0]))
+
+# читает данные из файла, преобразует к формату (телефон, str, int(телефон))
+def data_reading(lst, filename):
+    with open(filename, 'r') as file:
+        for line in file:
+            lst.append(convert_to_tuple(line))
+
+# преобразует сортированные данные к исходному формату
+def data_to_original_format(sorted_data):
+    result_tmp = [elem[0] + '\t' + elem[1] for elem in sorted_data]
+    result = [s + '\n' if s != result_tmp[-1] else s for s in result_tmp]
+    return result
+    
+# удобнее было сделать классом
 class PhoneNumbersRadixSort:
-    def __init__(self, data_):
-        self.data = data_
-        self.result = None
+    def __init__(self, data, result=None):
+        self.data = data
+        self.result = result
 
-    def _number_to_int(self, phone_number):
-        result = re.sub(r"\D", "", phone_number)
-        return int(result)
-
-    def _data_preprocessing(self, data_):
-        out = []
-        for line in data_:
-            elem = line.split()
-            out.append((elem[0], "\t" + elem[1], self._number_to_int(elem[0])))
-        return out
-
-    def _one_digit_counting_sort(self, arr, exp):
-        len_arr = len(arr)
-        base = 10
+    def counting_sort(self, arr, digit, base, key):
+        length = len(arr)
 
         tmp = [0 for _ in range(base)]
-        out = [0 for _ in range(len_arr)]
+        out = [0 for _ in range(length)]
 
         for elem in arr:
-            index = (elem[2] // exp) % base
+            index = (key(elem) // digit) % base
             tmp[index] += 1
 
         for i in range(1, base):
-            tmp[i] += tmp[i - 1]
+            tmp[i] += tmp[i-1]
 
-        for i in range(len_arr - 1, -1, -1):
-            index = (arr[i][2] // exp) % base
-            out[tmp[index] - 1] = arr[i]
+        for elem in arr[::-1]:
+            index = (key(elem) // digit) % base
+            out[tmp[index] - 1] = elem
             tmp[index] -= 1
 
-        for i in range(len_arr):
+        for i in range(length):
             arr[i] = out[i]
 
         return arr
 
-    def _one_digit_radix_sort(self, arr):
-        tmp = [elem[2] for elem in arr]
+    def radix_sort(self, arr, key):
+        base = 10
+        digit = 1
+        tmp = [key(elem) for elem in arr]
         max_value = max(tmp)
-        exp = 1
-        while max_value / exp >= 1:
-            self._one_digit_counting_sort(arr, exp)
-            exp *= 10
+        while max_value / digit >= 1:
+            self.counting_sort(arr, digit, base, key)
+            digit *= 10
 
         return arr
 
-    def sort(self):
-        preprocessed_data = self._data_preprocessing(self.data)
-        sorted_data_ = self._one_digit_radix_sort(preprocessed_data)
-        result_list = [str(elem[0]) + elem[1] for elem in sorted_data_]
-        self.result = [s + "\n" if s != result_list[-1] else s for s in result_list]
+    def sort(self, key):
+        sorted_data = self.radix_sort(self.data, key=key)
+        result_list = [elem[0].lstrip() + '\t' + elem[1] for elem in sorted_data]
+        self.result = [s + '\n' if s != result_list[-1] else s for s in result_list]
         return self.result
-
-    def to_txt(self, filename):
-        with open(filename, "w") as f:
-            f.write(''.join(self.result))
-
-
-data = []
-with open("test_input_one.txt", "r") as file:
-    for line in file:
-        data.append(line)
-
-
-solver = PhoneNumbersRadixSort(data)
-sorted_data = solver.sort()
-print(sorted_data)
-
-output = []
-with open("test_output_one.txt", "r") as file:
-    for line in file:
-        output.append(line)
-
-print(output)
+        
