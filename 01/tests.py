@@ -3,57 +3,69 @@ import unittest
 
 
 class SolutionTestCase(unittest.TestCase):
-    def test_original_data(self):       # исходные данные
-        test_data = []
-        solution.data_reading(test_data, './data/original_data.txt')
-        
-        expected = sorted(test_data, key=lambda x: x[0])
-        solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
 
-        self.assertEqual(test_data, expected)
+	@classmethod
+	def setUpClass(cls):
+		'''Set up for class'''
+		print('QUICK SORT SOLUTION TESTS')
+		print('==========')
+		
+		
+	@classmethod
+	def tearDownClass(cls):
+		'''Tear down for class'''
+		print('==========')
+		
+		
+	def setUp(self):
+		'''Set up for test'''
+		print('Set up for [' + self.shortDescription() + ']')
+		
+	
+	def tearDown(self):
+		'''Tear down for test'''
+		print('Tear down for [' + self.shortDescription() + ']')
+		
+		
+	def prepairing(self, data):
+		test_data = []
+		solution.data_reading(test_data, data)
+		expected = sorted(test_data, key=lambda x: x[0])
+		solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
+		return (test_data, expected)
+		
+		
+	def test_original_data(self):
+		'''ORIGINAL DATA TEST'''
+		actual, expected = self.prepairing('./data/original_data.txt')
+		self.assertEqual(actual, expected)
         
         
-    def test_random_order(self):       # данные побольше в рандомном порядке
-        test_data = []
-        solution.data_reading(test_data, './test_data/test_random_order.txt')
-
-        expected = sorted(test_data, key=lambda x: x[0])
-        solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
-
-        self.assertEqual(test_data, expected)
+	def test_random_order(self):
+		'''RANDOM ORDER TEST'''
+		actual, expected = self.prepairing('./test_data/test_random_order.txt')
+		self.assertEqual(actual, expected)
         
         
-    def test_reverse_order(self):       # данные побольше в обратном порядке
-        test_data = []
-        solution.data_reading(test_data, './test_data/test_reverse_order.txt')
-        
-        expected = sorted(test_data, key=lambda x: x[0])
-        solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
-
-        self.assertEqual(test_data, expected)
+	def test_reverse_order(self):
+		'''REVERSE ORDER TEST'''
+		actual, expected = self.prepairing('./test_data/test_reverse_order.txt')
+		self.assertEqual(actual, expected)
         
           
-    def test_single_element(self):       # массив из одного элемента
-        test_data = []
-        solution.data_reading(test_data, './test_data/test_single_element.txt')
-
-        expected = sorted(test_data, key=lambda x: x[0])
-        solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
-
-        self.assertEqual(test_data, expected)
+	def test_single_element(self):
+		'''SINGLE ELEMENT TEST'''
+		actual, expected = self.prepairing('./test_data/test_single_element.txt')
+		self.assertEqual(actual, expected)
         
     
-    def test_stability(self):			# устойчивость
-    	test_data = []
-    	solution.data_reading(test_data, './test_data/test_stability.txt')
-    	
-    	expected = sorted(test_data, key=lambda x: x[0])
-    	solution.quick_sort_and_partition(test_data, key=lambda x: x[0])
-    	
-    	if test_data == expected:
-    		print('stable')
-    	else:
-    		print('unstable')
-    	    	
-    	self.assertIsNot(test_data, expected)
+	def test_stability(self):
+		'''STABILITY TEST'''
+		test_data = []
+		actual, expected = self.prepairing('./test_data/test_stability.txt')
+		if actual == expected:
+			print('stable')
+		else:
+			print('unstable')
+		self.assertIsNot(actual, expected)
 
