@@ -1,6 +1,6 @@
 # Homework 1
 [описание](https://github.com/mailcourses/hse_algorithms_and_data_structures_spring_2024/blob/21ee0b23ba9a9468d5f5b86949059bfba58ca212/lesson-03/homework.md)
-### Логика
+### Идея
 - приходят пары "ключ-значение"
 - сохраняем их в контейнер в порядке поступления
 - получается список из кортежей. Можно структурами, но захотел кортежами
