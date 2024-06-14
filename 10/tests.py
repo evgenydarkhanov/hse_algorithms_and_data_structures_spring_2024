@@ -7,13 +7,13 @@ class SolutionTestCase(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		""" set up for class """
-		print("RECTANGLE AREA TESTS")
-		print("====================")
+		print("COIN EXCHANGE TESTS")
+		print("===================")
 		
 	@classmethod
 	def tearDownClass(cls):
 		""" tear down for class """
-		print("====================")
+		print("===================")
 		
 	def setUp(self):
 		""" set up for test """
