@@ -11,7 +11,8 @@ def exchange(coins: list[int], money: int) -> list:
 				i -= 1
 				continue
 		break
-
+	if money != 0:
+		return []
 	return result
 	
 	
