@@ -1,8 +1,8 @@
 # Homework 10
 [Описание](https://github.com/mailcourses/hse_algorithms_and_data_structures_spring_2024/blob/main/lesson-14/homework.md)
 ### Идея
-- пока `money >= 0` берём монету с наибольшим номиналом, не превышающим `money` и вычитаем
-
+- пока `money >= 0` берём монету с наибольшим номиналом, не превышающим `money`, и вычитаем из `money`
+ 
 ### Содержимое
 - `coins.py` - решение
 - `tests.py` - тесты
